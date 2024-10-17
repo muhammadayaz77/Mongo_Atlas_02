@@ -2,8 +2,10 @@ import express from 'express'
 import dotenv from 'dotenv'
 import connectDB from './config/database.mjs';
 import ItemRouter from './routes/ItemRoute.mjs'
+import cors from 'cors'
 let app = express();
 app.use(express.json());
+app.use(cors());
 dotenv.config();
 
 connectDB();
