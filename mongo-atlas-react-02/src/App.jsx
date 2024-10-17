@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-let URL = 'https://mongo-atlas-crud-1-bf5iclxbv-muhammadayaz77s-projects.vercel.app/api/items';
+import Modal from './components/Modal';
+import AppTitle from './components/AppTitle';
+import TableContent from './components/TableContent';
+let URL = 'https://mongo-atlas-crud-1.vercel.app/api/items';
 function App() {
-  
+  let [getData,setGetData] = useState({
+    name : '',
+    email : ''
+  })
   let [user,setUser] = useState([]);
-  useEffect(() => {
+  let GETData = () => {
     axios.get(URL)
   .then(function (response) {
     // handle success
     setUser(response.data);
-    console.log(response.data);
   })
   .catch(function (error) {
     // handle error
@@ -18,15 +23,27 @@ function App() {
   .finally(function () {
     // always executed
   });
+  }
+  useEffect(() => {
+    GETData();
   },[])
+  let handleAddButton = () => {
+    document.getElementById('my_modal_1').showModal();
+   
+  }
   return (
-    <>
-    {user.map((item) => {
-      <ul>
-        <li>{item.name}</li>
-      </ul>
-    })}
-    </>
+    <div className='pt-20 px-10'>
+    <div className='flex justify-between items-center'>
+    <AppTitle></AppTitle>
+    {/* <button className="btn">open modal</button> */}
+    <button 
+     onClick={handleAddButton}
+    className="btn btn-active btn-primary text-xl font-light text-white">ADD User</button>
+    </div>
+        <TableContent user={user} setUser={setUser} GETData={GETData} />
+        {/* hello */}
+        <Modal getData={getData} setGetData={setGetData} GETData={GETData}></Modal>
+    </div>
   )
 }
 
