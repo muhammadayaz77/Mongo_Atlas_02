@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+let URL = 'https://mongo-atlas-crud-1-bf5iclxbv-muhammadayaz77s-projects.vercel.app/api/items';
 function App() {
   
   let [user,setUser] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:3000/api/items')
+    axios.get(URL)
   .then(function (response) {
     // handle success
     setUser(response.data);
