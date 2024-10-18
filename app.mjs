@@ -6,7 +6,7 @@ import cors from 'cors'
 let app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173' // Allow requests from this origin only
+  origin: 'https://mongo-atlas-react-02.vercel.app/' // Allow requests from this origin only
 }));
 dotenv.config();
 
